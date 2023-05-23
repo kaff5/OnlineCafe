@@ -1,0 +1,66 @@
+﻿@model OnlineCafe.ViewModels.OrderCreateViewModel
+@{
+	ViewData["Title"] = "Оформление заказа";
+}
+
+<form asp-action="Create" asp-controller="Orders" method="POST">
+	<div class="row">
+		<div class="col-4">
+
+			<h5 class="mb-3">Выберите адрес для заказа</h5>
+			<select class="form-select me-6" name="Addresess">
+				@foreach (var address in @Model.Addresess)
+				{
+					<option value="@address">@address</option>
+				}
+			</select>
+
+			<h5 class="mt-3">Выберите время доставки</h5>
+			<select class="form-select mb-4" name="TimeToDelivery">
+				@foreach (var time in Model.TimeToDelivery)
+				{
+					<option value="@time.ToShortTimeString()">@time.ToShortTimeString()</option>
+				}
+			</select>
+		</div>
+
+
+		<div class="col-12">
+			<h1>Товары в корзине</h1>
+
+			<ol class="list-group list-group-numbered">
+				@foreach (var meal in Model.CardDishesViewModels.meals)
+				{
+					<li class="list-group-item d-flex justify-content-between align-items-start">
+						<div class="ms-2 me-auto">
+							<div class="fw-bold">
+								@meal.Name<span class="badge bg-primary rounded-pill ms-3">@meal.Count</span>
+							</div>
+						</div>
+						<a class="btn btn-danger btn-sm" asp-action="Delete" asp-controller="Cart" asp-route-id="@meal.Id">Удалить</a>
+					</li>
+				}
+				<div class="card-header d-flex mt-3 mb-3">
+					@if (Model.Discount != 0)
+					{
+						<h5 class="font-weight-bold">Цена: </h5>
+						<h5 class=" ms-2">
+							<s>@Model.Price</s>
+						</h5>
+						<p class=" ms-4">Скидка: @Model.Discount%</p>
+						<h5 class=" ms-4">Сумма к оплате: @Model.PriceWithDiscount</h5>
+					}
+					else
+					{
+						<p class="my-auto font-weight-bold">Цена: </p>
+						<p class="text-muted my-auto text news-date">@Model.Price</p>
+					}
+				</div>
+			</ol>
+		</div>
+
+		<div class="col-4 d-flex">
+			<button class="align-self-center btn btn-primary" type="submit">Заказать</button>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,47 @@
+﻿@using OnlineCafe.Storage
+@model OnlineCafe.ViewModels.MealsViewModel
+
+@{
+    ViewData["Title"] = "Изменение блюда";
+}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-3">Изменение блюда</h1>
+
+        <form asp-action="Update" asp-controller="Menu" method="POST" asp-route-id="@Model.Id" enctype="multipart/form-data">
+
+            <div class="mb-3">
+                <label for="fio" class="form-label" asp-for="Name">Название</label>
+                <input type="text" class="form-control" id="fio" asp-for="Name" value="@Model.Name">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="mb-3">
+                <label for="House" class="form-label" asp-for="Price">Цена</label>
+                <input type="text" class="form-control" id="House" asp-for="Price" value="@Model.Price">
+                <span class="text-danger" asp-validation-for="Price"></span>
+            </div>
+            <div class="mb-3">
+                <label for="Entrance" class="form-label" asp-for="Description">Описание</label>
+                <input type="text" class="form-control" id="Entrance" asp-for="Description" value="@Model.Description">
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+            <div class="mb-3">
+                <select class="form-select" asp-for="CategoryOfMeal" asp-items="Html.GetEnumSelectList<CategoryOfMeal>()">
+                </select>
+            </div>
+            <div class="col-4 d-flex">
+                <div class="form-check align-self-center">
+                    <label class="form-check-label" asp-for="isVegan">Вегетарианское</label>
+                    <input class="form-check-input" type="checkbox" value="true" asp-for="isVegan" checked>
+                </div>
+            </div>
+
+            <label class="form-label" for="file">Фотография блюда</label>
+            <input asp-for="File" type="file" id="file" class="form-control">
+
+
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <button type="submit" class="btn btn-primary">Подтвердить изменения</button>
+        </form>
+    </div>
+</div>

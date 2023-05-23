@@ -1,0 +1,30 @@
+﻿@using OnlineCafe.Storage
+@model OnlineCafe.ViewModels.EditOrderViewModel
+@{
+    ViewData["Title"] = "Изменение заказа";
+}
+
+<form asp-action="Edit" asp-controller="OrdersManagement" asp-route-id="@Model.orderId" method="Post">
+       <input type="hidden" name="@Model.orderId" value="@Model.orderId">
+    <!--enctype атрибут ОБЯЗАТЕЛЕН чтобы файл улетел с формы-->
+    <div class="mb-3">
+        <label asp-for="status" class="form-label">Статус</label>
+
+        <select class="form-select" asp-for="status" asp-items="Html.GetEnumSelectList<StatusOrder>().Skip((int)Model.status).Take(2)">
+        </select>
+        <span class="text-danger" asp-validation-for="status"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="dateTimes" class="form-label">Время доставки</label>
+        <select class="form-select mb-4" name="dateTimes">
+            @foreach (var time in Model.dateTimes)
+            {
+                <option value="@time.ToShortTimeString()">@time.ToShortTimeString()</option>
+            }
+        </select>
+    </div>
+
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>

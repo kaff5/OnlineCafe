@@ -1,0 +1,31 @@
+﻿@model OnlineCafe.ViewModels.EditAccountProfileViewModel
+
+@{
+    ViewData["Title"] = "Изменение данных";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-3">Изменение данных пользователя</h1>
+
+        <form asp-action="EditAccountProfile" asp-controller="AccountProfile" asp-route-id="@Model.Id" method="POST">
+            <div class="mb-3">
+                <label for="fio" class="form-label" asp-for="Name">ФИО</label>
+                <input type="text" class="form-control" id="fio" asp-for="Name" value="@Model.Name">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label" asp-for="Phone">Телефон</label>
+                <input type="text" class="form-control" id="phone" asp-for="Phone" value="@Model.Phone">
+                <span class="text-danger" asp-validation-for="Phone"></span>
+            </div>
+            <div class="mb-3">
+                <label for="birthdate" class="form-label" asp-for="BirthDate">День рождения</label>
+                <input type="date" class="form-control" id="birthdate" asp-for="BirthDate" value="@Model.BirthDate">
+                <span class="text-danger" asp-validation-for="BirthDate"></span>
+            </div>
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <button type="submit" class="btn btn-primary">Подтвердить изменения</button>
+        </form>
+    </div>
+</div>

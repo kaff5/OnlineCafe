@@ -1,0 +1,52 @@
+﻿@model OnlineCafe.ViewModels.AddressViewModel
+
+@{
+    ViewData["Title"] = "Добавление адреса";
+}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-3">Добавление нового адреса</h1>
+
+        <form asp-action="AddAddress" asp-controller="AccountProfile" method="POST">
+            <div class="mb-3">
+                <label for="fio" class="form-label" asp-for="Street">Улица</label>
+                <input type="text" class="form-control" id="fio" asp-for="Street">
+                <span class="text-danger" asp-validation-for="Street"></span>
+            </div>
+            <div class="mb-3">
+                <label for="House" class="form-label" asp-for="House">Дом</label>
+                <input type="text" class="form-control" id="House" asp-for="House">
+                <span class="text-danger" asp-validation-for="House"></span>
+            </div>
+            <div class="mb-3">
+                <label for="Entrance" class="form-label" asp-for="Entrance">Подъезд</label>
+                <input type="text" class="form-control" id="Entrance" asp-for="Entrance">
+                <span class="text-danger" asp-validation-for="House"></span>
+            </div>
+            <div class="mb-3">
+                <label for="Flat" class="form-label" asp-for="Flat">Квартира</label>
+                <input type="text" class="form-control" id="Flat" asp-for="Flat">
+                <span class="text-danger" asp-validation-for="Flat"></span>
+            </div>
+            <div class="mb-3">
+                <label for="Note" class="form-label" asp-for="Note">Примечание</label>
+                <input type="text" class="form-control" id="Note" asp-for="Note">
+                <span class="text-danger" asp-validation-for="Note"></span>
+            </div>
+            <div class="mb-3">
+                <label for="Name" class="form-label" asp-for="Name">Название</label>
+                <input type="text" class="form-control" id="Name" asp-for="Name">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="col-4 d-flex">
+                <div class="form-check align-self-center">
+                    <label class="form-check-label" asp-for="MainAddress">Сделать главным адресом</label>
+                    <input class="form-check-input" type="checkbox" value="True" asp-for="MainAddress" checked>
+                </div>
+            </div>
+
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <button type="submit" class="btn btn-primary">Добавить адрес</button>
+        </form>
+    </div>
+</div>

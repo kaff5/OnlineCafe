@@ -1,0 +1,38 @@
+﻿@model OnlineCafe.ViewModels.OrderForPageAdminViewModel
+@{
+    ViewData["Title"] = "Информация о заказе";
+}
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">Заказ</h5>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <h5>Id заказа:</h5>
+            <h6>@Model.Id</h6>
+        </div>
+        <div class="mb-3">
+            <h5>Дата заказа:</h5>
+            <h6>@Model.CreateTime</h6>
+        </div>
+        <div class="mb-3">
+            <h5>Время доставки</h5>
+            <h6>@Model.DeliveryTime</h6>
+        </div>
+        <div class="mb-3">
+            <h5>Статус заказа</h5>
+            <h6>@Model.StatusOrder</h6>
+        </div>
+        <div class="mb-3">
+            <h5>Владелец заказа</h5>
+            <h6>@Model.UserId</h6>
+        </div>
+        <div class="mb-3">
+            <h5>Адрес заказа</h5>
+            <h6>@Model.Address</h6>
+        </div>
+        <div class="mb-3">
+            <a class="btn btn-outline-warning" asp-action="Edit" asp-controller="OrdersManagement" asp-route-id="@Model.Id">Изменить основную информацию</a>
+        </div>
+    </div>
+</div>

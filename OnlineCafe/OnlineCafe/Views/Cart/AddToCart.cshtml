@@ -1,0 +1,41 @@
+﻿@using OnlineCafe.Storage
+@model OnlineCafe.ViewModels.MealsViewModel
+
+@{
+    ViewData["Title"] = "Добавление блюда в корзину";
+}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-3">Добавление блюда в корзину</h1>
+
+        <form asp-action="SubmitAddToCart" asp-controller="Cart" method="POST" asp-route-id="@Model.Id">
+
+            <div class="mb-3">
+                <p>Название: @Model.Name</p>
+            </div>
+            <div class="mb-3">
+                <p>Цена: @Model.Price</p>
+
+            </div>
+            <div class="mb-3">
+                <p>Описание: @Model.Description</p>
+            </div>
+            <div class="mb-3">
+                <p>Категория: @Model.CategoryOfMeal</p>
+            </div>
+            <div class="mb-3">
+                @if (@Model.isVegan)
+                {
+                    <p>Вегетарианское</p>
+                }
+                else
+                {
+                    <p>Не вегетарианское</p>
+                }
+            </div>
+
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <button type="submit" class="btn btn-primary">Добавить в корзину</button>
+        </form>
+    </div>
+</div>

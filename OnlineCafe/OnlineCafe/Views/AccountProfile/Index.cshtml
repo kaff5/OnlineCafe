@@ -1,0 +1,110 @@
+﻿@model OnlineCafe.ViewModels.AccountProfileViewModel
+@{
+    ViewData["Title"] = "Профиль";
+}
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">Профиль</h5>
+    </div>
+    <div class="card-body" style="height: 290px;">
+        <h5 style="margin-bottom: 30px;">Основная информация</h5>
+        <div style="margin: 0px;">
+            <strong>ФИО:&nbsp;</strong>
+            <small style="margin: 10px;">@Model.Name</small>
+            <div style="margin: 0px;margin-top: 10px;">
+                <strong>Email:&nbsp;</strong><small style="margin: 10px;">@Model.Email</small>
+                <div style="margin: 0px;margin-top: 10px;width: 670px;">
+                    <strong>Дата рождения:&nbsp;</strong>
+                    <small style="margin: 10px;">@Model.BirthDate.Value.ToShortDateString()</small>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 10px;"><strong>Телефон:&nbsp;</strong><small style="margin: 10px;">@Model.Phone</small></div>
+        <div>
+            <a class="btn btn-primary" asp-action="EditAccountProfile" asp-controller="AccountProfile" asp-route-id="@Model.Id">Изменить основную информацию</a>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Виды адресов:</h5>
+        <div class="d-flex" style="flex-direction: row; margin-bottom:30px">
+            <div class="bg-info card d-flex mr-1 h6" style="width: 95px; height: 30px; font-size: 0.9em; justify-content: center; flex-direction: row;">
+                <span class="my-auto">Главный</span>
+            </div>
+            <div class="card d-flex mr-1 bg-light h6" style="width: 85px; height: 30px; font-size: 0.9em; margin-left:10px; justify-content: center; flex-direction: row;">
+                <span class="my-auto">Обычный</span>
+            </div>
+        </div>
+        <h4 class="card-title">Адреса</h4>
+
+
+
+
+        <ul class="list-group mb-1">
+            @if (Model.Addresses.Count == 0)
+            {
+                <div class="card w-100" style="background: #d1ecf1; padding: 10px; display: flex; flex-direction: row; justify-content: center;">
+                    <p class="my-auto">Пока что у вас нет адресов</p>
+                </div>
+            }
+            else
+            {
+                @foreach (var address in Model.Addresses)
+                {
+                    <li class="list-group-item">
+                        @if (address.MainAddress)
+                        {
+                            <div class="row no-gutters align-items-center border border-light border-bottom-0 border-top-0 border-right-0 p-1 bg-info">
+                                <div class="col-12 col-md-10">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class=" text-uppercase h5">@address.Name</p>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="mb-1">@address.Street @address.House, @address.Flat</p>
+                                        </div>
+                                        <div class="form-text">@address.Note</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2 text-end">
+                                    <div class="btn-group" role="group">
+                                        <a class="btn btn-outline-warning" href="/AccountProfile/EditAddressPage/@address.Id"><i class="fas fa-pen"></i></a>
+                                        <a class="btn btn-outline-danger" asp-action="ConfirmDeleteAddress" asp-controller="AccountProfile" asp-route-id="@address.Id"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row no-gutters align-items-center border border-light border-bottom-0 border-top-0 border-right-0 p-1 bg-light">
+                                <div class="col-12 col-md-10">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class=" text-uppercase h5">@address.Name</p>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="mb-1">@address.Street @address.House, @address.Flat</p>
+                                        </div>
+                                        <div class="form-text">@address.Note</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2 text-end">
+                                    <div class="btn-group" role="group">
+                                        <a class="btn btn-outline-warning" href="/AccountProfile/EditAddressPage/@address.Id"><i class="fas fa-pen"></i></a>
+                                        <a class="btn btn-outline-danger" asp-action="ConfirmDeleteAddress" asp-controller="AccountProfile" asp-route-id="@address.Id"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </li>
+                }
+            }
+
+        </ul>
+        <a class="btn btn-primary" asp-area="" asp-controller="AccountProfile" asp-action="AddAddress" style="margin-top: 40px;">Добавить адрес</a>
+    </div>
+</div>
+
+

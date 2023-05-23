@@ -1,0 +1,26 @@
+﻿@model OnlineCafe.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Вход в систему";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-3">Авторизация</h1>
+
+        <form asp-action="Login" asp-controller="Account" method="Post">
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input type="email" class="form-control" asp-for="Email">
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="Password"></label>
+                <input type="password" class="form-control" asp-for="Password">
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
+
+    </div>
+</div>

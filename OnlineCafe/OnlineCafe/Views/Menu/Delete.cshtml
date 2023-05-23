@@ -1,0 +1,19 @@
+﻿@model OnlineCafe.ViewModels.MealsViewModel
+
+@{
+    ViewData["Title"] = "Потверждение удаления блюда";
+}
+<form asp-action="SubmitDelete" asp-controller="Menu" method="POST" asp-route-id="@Model.Id">
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title" style="width: 521px;margin-left: 65px;">Уверены ли что хотите удалить блюдо ?</h4>
+            <div><h5 style="margin-left: 201px;">@Model.Name</h5></div>
+            <div style="margin-left: 169px;margin-top: 24px;">
+                <div class="text-success" asp-validation-summary="All"></div>
+                <button type="submit" class="btn btn-primary style="width: 70px">Да</button>
+                <a class="btn btn-danger" asp-action="Index" asp-controller="AccountProfile" style="width: 70px">Нет</a>
+            </div>
+        </div>
+    </div>
+</form>

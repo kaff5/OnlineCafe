@@ -1,0 +1,29 @@
+﻿@model OnlineCafe.ViewModels.OrdersAdminViewModel
+@{
+    ViewData["Title"] = "История заказов";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-3">Последние заказы</h1>
+        <ul class="list-group">
+            @foreach (var order in Model.Orders)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Заказ #@order.Id от @order.CreateTime</div>
+                        <div>Статус заказа - @order.StatusOrder</div>
+                        <div>Доставка ожидается в @order.DeliveryTime.Hour:@order.DeliveryTime.Minute</div>
+                        <div>@foreach(var item in order.meals)
+                            {
+                                <p>@item.Name </p>
+                            }
+                        </div>
+                        <a class="btn btn-outline-success" asp-action="Details" asp-controller="OrdersManagement" asp-route-id="@order.Id">Подробнее</a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
